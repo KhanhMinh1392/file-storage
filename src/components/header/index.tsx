@@ -1,13 +1,13 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, User } from '@nextui-org/react';
 import { ThemeSwitcher } from '../theme-switcher';
-import Link from 'next/link';
 import Icon from '../icon';
 
 export default function Header() {
   return (
     <Navbar maxWidth="full" shouldHideOnScroll>
       <NavbarBrand>
-        <p className="font-bold text-inherit">STORAGE</p>
+        <Icon name="box" />
+        <p className="ml-2 font-bold text-inherit">STORAGE</p>
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
