@@ -1,9 +1,9 @@
-import Layout from '@/components/layouts';
 import { Providers } from '@/providers';
 import { cn } from '@nextui-org/theme';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
 import './globals.css';
+import { PrivateLayout, PublicLayout } from '@/components/layouts';
 
 export const metadata: Metadata = {
   title: 'Storage',
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" className={cn(GeistSans.className)} suppressHydrationWarning={true}>
       <body className="min-h-screen">
         <Providers>
-          <Layout>{children}</Layout>
+          <PublicLayout>{children}</PublicLayout>
         </Providers>
       </body>
     </html>
