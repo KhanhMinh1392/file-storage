@@ -20,7 +20,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
             <NavbarItem>Pricing</NavbarItem>
           </NavbarContent>
         </NavbarContent>
-        <NavbarContent justify="end">
+        <NavbarContent justify="end" className="hidden sm:flex">
           <NavbarItem>
             <ThemeSwitcher />
           </NavbarItem>
