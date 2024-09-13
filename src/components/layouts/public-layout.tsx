@@ -25,7 +25,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
             <ThemeSwitcher />
           </NavbarItem>
           <NavbarItem>
-            <Button variant="bordered">SignIn</Button>
+            <Button variant="bordered">Sign In</Button>
           </NavbarItem>
           <NavbarItem>
             <Button variant="bordered">Try it</Button>
