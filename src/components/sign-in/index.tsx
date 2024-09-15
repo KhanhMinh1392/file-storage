@@ -1,5 +1,6 @@
 'use client';
 import Icon, { GoogleIcon } from '@/components/icon';
+import { setCookie } from '@/lib/cookies';
 import { postSignIn } from '@/services/sign-in';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -45,10 +46,13 @@ export default function SignIn() {
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
-    console.log(data);
-    mutate(data);
-    reset();
-    onClose();
+    mutate(data, {
+      onSuccess: (data) => {
+        setCookie('accessToken', data.accessToken, 1);
+        reset();
+        onClose();
+      },
+    });
   };
 
   const handleOpenChange = () => {

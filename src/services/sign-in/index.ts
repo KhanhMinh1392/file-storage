@@ -5,7 +5,7 @@ interface IBodyReqSignIn {
   password: string;
 }
 
-export const postSignIn = async (bodyReq: IBodyReqSignIn): Promise<{ access_token: string }> => {
+export const postSignIn = async (bodyReq: IBodyReqSignIn): Promise<{ accessToken: string }> => {
   const url = '/auth/login';
   return await axiosInstance.post(url, bodyReq);
 };
