@@ -10,14 +10,20 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@nextui-org/button": "^2.0.37",
+    "@nextui-org/checkbox": "^2.1.4",
+    "@nextui-org/input": "^2.2.4",
+    "@nextui-org/modal": "^2.0.39",
     "@nextui-org/navbar": "^2.0.36",
     "@nextui-org/progress": "^2.0.33",
     "@nextui-org/react": "^2.4.6",
     "@nextui-org/system": "^2.2.5",
     "@nextui-org/theme": "^2.2.9",
     "@nextui-org/user": "^2.0.33",
+    "@tanstack/react-query": "^5.56.2",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
+    "axios": "^1.7.7",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "framer-motion": "^11.3.24",
@@ -28,7 +34,9 @@
     "next": "14.2.5",
     "next-themes": "^0.3.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.53.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

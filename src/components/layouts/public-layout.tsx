@@ -1,3 +1,4 @@
+import SignIn from '@/components/sign-in';
 import { Button } from '@nextui-org/button';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/navbar';
 import { PropsWithChildren } from 'react';
@@ -25,7 +26,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
             <ThemeSwitcher />
           </NavbarItem>
           <NavbarItem>
-            <Button variant="bordered">Sign In</Button>
+            <SignIn />
           </NavbarItem>
           <NavbarItem>
             <Button variant="bordered">Try it</Button>
