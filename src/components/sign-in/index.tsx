@@ -16,6 +16,7 @@ import {
 } from '@nextui-org/react';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -29,6 +30,7 @@ type SignUpSchemaType = z.infer<typeof SignInSchema>;
 
 export default function SignIn() {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const router = useRouter();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -48,9 +50,11 @@ export default function SignIn() {
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
     mutate(data, {
       onSuccess: (data) => {
-        setCookie('accessToken', data.accessToken, 1);
         reset();
         onClose();
+        setCookie('accessToken', data.accessToken, 1);
+        router.push('/home');
+        router.refresh();
       },
     });
   };

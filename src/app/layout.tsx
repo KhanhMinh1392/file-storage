@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
 import './globals.css';
 import { PrivateLayout, PublicLayout } from '@/components/layouts';
+import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'Storage',
@@ -15,11 +16,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookiesStore = cookies();
+  const token = cookiesStore.get('accessToken')?.value;
+  const Comp = token ? PrivateLayout : PublicLayout;
   return (
     <html lang="en" className={cn(GeistSans.className)} suppressHydrationWarning={true}>
       <body className="min-h-screen">
         <Providers>
-          <PublicLayout>{children}</PublicLayout>
+          <Comp>{children}</Comp>
         </Providers>
       </body>
     </html>
