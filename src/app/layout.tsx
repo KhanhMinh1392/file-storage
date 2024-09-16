@@ -18,12 +18,13 @@ export default function RootLayout({
 }>) {
   const cookiesStore = cookies();
   const token = cookiesStore.get('accessToken')?.value;
-  const Comp = token ? PrivateLayout : PublicLayout;
+  const LayoutComp = token ? PrivateLayout : PublicLayout;
+
   return (
     <html lang="en" className={cn(GeistSans.className)} suppressHydrationWarning={true}>
       <body className="min-h-screen">
         <Providers>
-          <Comp>{children}</Comp>
+          <LayoutComp>{children}</LayoutComp>
         </Providers>
       </body>
     </html>
