@@ -29,25 +29,40 @@ const SignInSchema = z.object({
 type SignUpSchemaType = z.infer<typeof SignInSchema>;
 
 export default function SignIn() {
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const router = useRouter();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  const isWindow = typeof window !== 'undefined';
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isRememberMe, setIsRememberMe] = useState<boolean>(
+    isWindow ? localStorage.getItem('remember') === 'true' : false,
+  );
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignInSchema) });
+  } = useForm<SignUpSchemaType>({
+    resolver: zodResolver(SignInSchema),
+    defaultValues: {
+      email: isWindow ? localStorage.getItem('username') || '' : '',
+      password: isWindow ? localStorage.getItem('password') || '' : '',
+    },
+  });
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: postSignIn,
   });
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
+    localStorage.setItem('username', isRememberMe ? data.email : '');
+    localStorage.setItem('password', isRememberMe ? data.password : '');
+    localStorage.setItem('remember', String(isRememberMe));
+
     mutate(data, {
       onSuccess: (data) => {
         reset();
@@ -114,19 +129,20 @@ export default function SignIn() {
                     {...register('password')}
                   />
                   <div className="mb-4 flex items-center justify-between">
-                    <Checkbox size="md">
+                    <Checkbox size="md" isSelected={isRememberMe} onClick={() => setIsRememberMe(!isRememberMe)}>
                       <span className="text-sm text-gray-500">Remember me</span>
                     </Checkbox>
                     <Link href="#" className="text-sm text-blue-500">
                       Forgot password?
                     </Link>
                   </div>
-                  <Button color="primary" type="submit" size="lg" className="w-full">
+                  <Button color="primary" type="submit" size="lg" className="w-full" isDisabled={isPending}>
                     Sign in
                   </Button>
                 </form>
               </ModalBody>
-              <ModalFooter className="mt-2 border-t">
+              <hr className="mt-2" />
+              <ModalFooter>
                 <Button size="lg" variant="bordered" className="w-full" onPress={onClose}>
                   <GoogleIcon />
                   Sign in with Google
