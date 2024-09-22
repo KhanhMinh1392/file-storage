@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
-import Icon from '../icon';
 import { Progress } from '@nextui-org/progress';
+import { PropsWithChildren } from 'react';
 import Header from '../header';
+import Icon from '../icon';
 
 export default function PrivateLayout({ children }: PropsWithChildren) {
   return (
@@ -43,7 +43,7 @@ export default function PrivateLayout({ children }: PropsWithChildren) {
       </aside>
       <div className="mt-1 flex-1">
         <Header />
-        {children}
+        <main className="p-5">{children}</main>
       </div>
     </div>
   );
