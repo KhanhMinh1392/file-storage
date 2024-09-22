@@ -1,10 +1,12 @@
+import { PrivateLayout, PublicLayout } from '@/components/layouts';
 import { Providers } from '@/providers';
 import { cn } from '@nextui-org/theme';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
-import './globals.css';
-import { PrivateLayout, PublicLayout } from '@/components/layouts';
 import { cookies } from 'next/headers';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Storage',
@@ -25,6 +27,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <Providers>
           <LayoutComp>{children}</LayoutComp>
+          <ToastContainer position="bottom-right" />
         </Providers>
       </body>
     </html>

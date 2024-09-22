@@ -19,6 +19,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 const SignInSchema = z.object({
@@ -68,8 +69,12 @@ export default function SignIn() {
         reset();
         onClose();
         setCookie('accessToken', data.accessToken, 1);
+        toast.success('Sign in successfully');
         router.push('/home');
         router.refresh();
+      },
+      onError: () => {
+        toast.error('Sign in failure');
       },
     });
   };
