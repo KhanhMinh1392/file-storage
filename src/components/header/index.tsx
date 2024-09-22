@@ -28,6 +28,7 @@ export default function Header() {
 
   const handleLogout = () => {
     setCookie('accessToken', '', 0);
+    router.replace('/');
     router.refresh();
   };
 
