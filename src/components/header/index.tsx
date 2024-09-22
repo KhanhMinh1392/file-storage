@@ -14,9 +14,17 @@ import Icon from '../icon';
 import { ThemeSwitcher } from '../theme-switcher';
 import { setCookie } from '@/lib/cookies';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { getAccountInfo } from '@/services/account';
 
 export default function Header() {
   const router = useRouter();
+
+  const { data: userInfo } = useQuery({
+    queryFn: getAccountInfo,
+    queryKey: ['account-info'],
+  });
 
   const handleLogout = () => {
     setCookie('accessToken', '', 0);
@@ -37,7 +45,7 @@ export default function Header() {
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <User
-                name="Dao Khanh Minh"
+                name={userInfo?.fullName}
                 description="Software Engineer"
                 avatarProps={{
                   size: 'sm',
@@ -46,7 +54,9 @@ export default function Header() {
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat" className="w-36">
-              <DropdownItem key="account">My Account</DropdownItem>
+              <DropdownItem key="account" href="/account" as={Link}>
+                My Account
+              </DropdownItem>
               <DropdownItem key="logout" onClick={handleLogout}>
                 Log Out
               </DropdownItem>
