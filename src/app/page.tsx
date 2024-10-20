@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Thumbnail from '@/assets/images/thumbnail.webp';
 import { Button } from '@nextui-org/button';
 
-export default function Home() {
+export default function Page() {
   return (
     <main className="px-6">
       <section className="mx-auto grid h-full grid-cols-1 place-items-center gap-3 max-sm:my-6 md:min-h-[720px] md:max-w-7xl md:grid-cols-2">

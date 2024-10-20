@@ -16,6 +16,18 @@ export function ThemeSwitcher() {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    const handleChangeTheme = () => {
+      const newColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      setTheme(newColorScheme);
+    };
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleChangeTheme);
+
+    return () => {
+      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', handleChangeTheme);
+    };
+  }, [setTheme]);
+
   if (!mounted) return null;
 
   return (

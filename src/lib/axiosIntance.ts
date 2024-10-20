@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie } from './cookies';
+import { deleteCookie, getCookie } from 'cookies-next';
 
 const axiosInstance = axios.create({
   baseURL: 'https://file-storage-lake.vercel.app/api/v1', // Replace with your API base URL
@@ -34,6 +34,7 @@ axiosInstance.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // Handle unauthorized error
       console.error('Unauthorized, logging out...');
+      deleteCookie('accessToken');
       // Perform any logout actions or redirect to login page
     }
     return Promise.reject(error);

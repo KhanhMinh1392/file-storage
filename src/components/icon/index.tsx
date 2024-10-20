@@ -1,10 +1,6 @@
-import dynamic from 'next/dynamic';
 import { LucideProps } from 'lucide-react';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-
-interface IconProps extends LucideProps {
-  name: keyof typeof dynamicIconImports;
-}
+import dynamic from 'next/dynamic';
 
 export const GoogleIcon = () => {
   return (
@@ -36,10 +32,17 @@ export const GoogleIcon = () => {
   );
 };
 
-const Icon = ({ name, ...props }: IconProps) => {
-  const LucideIcon = dynamic(dynamicIconImports[name]);
+interface IconProps extends LucideProps {
+  name: keyof typeof dynamicIconImports;
+}
 
-  return <LucideIcon width={20} height={20} {...props} />;
+const Icon = ({ name, ...props }: IconProps) => {
+  const LucideIcon = dynamic(dynamicIconImports[name], {
+    ssr: false,
+    loading: () => <div className="size-6 rounded-full bg-gray-500"></div>,
+  });
+
+  return <LucideIcon {...props} />;
 };
 
 export default Icon;

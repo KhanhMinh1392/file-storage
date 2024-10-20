@@ -1,6 +1,6 @@
 'use client';
 import Icon, { GoogleIcon } from '@/components/icon';
-import { setCookie } from '@/lib/cookies';
+import { setCookie } from 'cookies-next';
 import { postSignIn } from '@/services/sign-in';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -68,7 +68,7 @@ export default function SignIn() {
       onSuccess: (data) => {
         reset();
         onClose();
-        setCookie('accessToken', data.accessToken, 1);
+        setCookie('accessToken', data.accessToken);
         toast.success('Sign in successfully');
         router.push('/home');
         router.refresh();

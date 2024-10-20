@@ -12,7 +12,7 @@ import {
 } from '@nextui-org/react';
 import Icon from '../icon';
 import { ThemeSwitcher } from '../theme-switcher';
-import { setCookie } from '@/lib/cookies';
+import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
@@ -27,17 +27,17 @@ export default function Header() {
   });
 
   const handleLogout = () => {
-    setCookie('accessToken', '', 0);
+    setCookie('accessToken', '');
     router.replace('/');
     router.refresh();
   };
 
   return (
-    <Navbar maxWidth="full" shouldHideOnScroll>
-      <NavbarBrand>
-        <Icon name="box" />
+    <Navbar maxWidth="full" shouldHideOnScroll className="border-b">
+      {/* <NavbarBrand>
+        <Icon name="mountain" className="h-6 w-6" />
         <p className="ml-2 font-bold text-inherit">STORAGE</p>
-      </NavbarBrand>
+      </NavbarBrand> */}
       <NavbarContent justify="end">
         <NavbarItem>
           <ThemeSwitcher />
@@ -55,10 +55,10 @@ export default function Header() {
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat" className="w-36">
-              <DropdownItem key="account" href="/account" as={Link}>
-                My Account
+              <DropdownItem key="account" textValue="account">
+                <Link href={'/account'}>My Account</Link>
               </DropdownItem>
-              <DropdownItem key="logout" onClick={handleLogout}>
+              <DropdownItem key="logout" textValue="logout" onClick={handleLogout}>
                 Log Out
               </DropdownItem>
             </DropdownMenu>
